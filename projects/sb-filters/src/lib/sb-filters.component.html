@@ -1,0 +1,108 @@
+<!-- <mat-card  > -->
+    <div  *ngIf = "configJsonData">
+        <div class="example-card" >
+        <h2>{{searchFilterInfo?.title | translate}}</h2>
+        <h4>{{searchFilterInfo?.subTitle | translate}}</h4>
+        <form  [formGroup]="formGroupData" (ngSubmit)="onSubmit()">
+            <div [ngClass]="searchFilterInfo.styling?.orientation">               
+                <ng-container *ngFor="let configData of configJsonData|sortByOrder"> 
+                    <!--  Library dropdown filtres -->
+                    <div>
+                    <mat-form-field   *ngIf="configData?.type.toLowerCase() === FilterType.DROPDOWN " appearance="outline">
+                        <mat-label >{{configData?.label |translate }}</mat-label>
+                        <mat-select
+                        [formControlName]="configData.formControlName"
+                        (selectionChange)="onSelected($event)">
+                        <!-- <mat-option>--select--</mat-option> -->
+                        <mat-option *ngFor = "let dValue of configData.dataList" value="{{dValue?.value}}">{{dValue?.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+    
+                    <!-- Library multi-dropdown filtres -->
+                    <div>
+                    <mat-form-field  *ngIf="configData?.type.toLowerCase() === FilterType.MULTIPLE_DROPDOWN" appearance="outline">
+                        <mat-label>{{configData?.label| translate}}</mat-label>
+                        <mat-select
+                        [formControlName]="configData.formControlName" 
+                        (selectionChange)="onSelected($event)"
+                        [multiple]= true>
+                        <!-- <mat-option value=" ">--select--</mat-option> -->
+                        <mat-option *ngFor = "let dValue of configData.dataList" value="{{dValue?.value}}">{{dValue?.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                    <!-- Library input type filtres -->
+                <div>
+                    <mat-form-field  *ngIf="[FilterType.TEXT,'password', FilterType.EMAIL, FilterType.NUMBER,FilterType.TEL].includes(configData.type.toLowerCase())" class="example-full-width" appearance="outline">
+                        <mat-label>{{configData?.label| translate}}</mat-label>
+                        <input  
+                        [type]="configData.type.toLowerCase()"
+                        [formControlName]="configData.formControlName"
+                        [value]="configData.preSelectedValue"
+                        [placeholder]="configData?.placeholder | translate"
+                        (focusout) = "onKeyup($event)"
+                        matInput>
+                    </mat-form-field>
+                </div>
+                    <!-- Library textarea filtres -->
+                <div>
+                    <mat-form-field  *ngIf="configData.type.toLowerCase() === FilterType.TEXTAREA"  appearance="outline">
+                        <mat-label>{{configData?.label|translate}}</mat-label>
+                        <textarea 
+                        [formControlName]="configData.formControlName"
+                        [type]="configData.type.toLowerCase()" 
+                        matInput 
+                        [value]="configData.preSelectedValue"
+                        (onFocousOut) = "onKeyup($event)"
+                        [placeholder] = "configData?.placeholder | translate">
+                        </textarea>
+                    </mat-form-field>
+                </div>
+                    <!-- Library radio type filtres -->
+                <div>
+                    <mat-radio-group  *ngIf="configData?.type.toLowerCase() === FilterType.RADIO "
+                    [formControlName]="configData?.formControlName"
+                    aria-labelledby="example-radio-group-label" 
+                    class="example-radio-group">
+                    <label id="example-radio-group-label">{{configData?.label|translate}}</label>
+                    <mat-radio-button class="example-radio-button"
+                        (change)="onItemChange($event,configData?.formControlName)" 
+                        *ngFor="let list of configData.dataList" 
+                        [value]="list.value">
+                        {{list.value | translate}}
+                    </mat-radio-button>
+                    </mat-radio-group>     
+                </div>
+                    <!-- Library checkBox type filtres-->
+                <div>
+                    <section  *ngIf="configData?.type.toLowerCase() === FilterType.CHECKBOX " class="example-section" [formArrayName]="configData.formControlName">
+                    <h4>{{configData?.label|translate}}</h4>
+                    <span class="example-list-section">
+                    <ul>
+                    <li *ngFor="let list of configData?.dataList">
+                    <mat-checkbox 
+                    [checked] = "configData?.preSelectedValue"
+                    [formControlName]="list.value"
+                    (change)="onCheckedItem($event)"
+                    value="{{list?.value }}">{{(list?.displayName === "" ? list?.value : list?.displayName ) |translate}}</mat-checkbox></li></ul></span>
+                    </section>
+                </div>
+                </ng-container>
+            </div>  
+
+            <div *ngIf = "searchFilterInfo?.isButtonReq" > 
+                <button  [disabled]="!formGroupData.valid" mat-raised-button type= ButtonType.SUBMIT>{{searchFilterInfo?.submit | translate}}</button>
+                <button  mat-raised-button (click) = "resetFormData()" type= ButtonType.BUTTON>{{searchFilterInfo?.clear | translate}}</button>
+    
+            </div>
+    
+        </form>
+    </div>
+    
+        </div>
+        <!-- </div>
+        <div *ngIf="configJsonData?.length == 0">
+            <p>There is no JSON data found!!</p>
+        </div>
+    (change)="onCheckedItem(list.value,$event.checked,configData.formControlName)" -->    

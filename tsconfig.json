@@ -14,6 +14,13 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "paths": {
+      "sb-filters": [
+        "dist/sb-filters/sb-filters",
+        "dist/sb-filters"
+      ]
+    },
+    "strictPropertyInitialization": false,
     "target": "es2015",
     "module": "es2020",
     "lib": [
