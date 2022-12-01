@@ -69,11 +69,15 @@ export class AppModule { }
     type: string;
     placeholder: string;
     dataList: dataList[
+      ```
       id:number,
       value:string,
       displayName?:string
+
+      ```
     ];
     validators?: JsonFormValidators[
+      ```
       min?: number;
       max?: number;
       required?: boolean;
@@ -83,12 +87,15 @@ export class AppModule { }
       maxLength?: boolean;
       pattern?: string;
       nullValidator?: boolean;
+      ```
     ];
     options?: JsonFormControlOptions[
+      ```
       min?: string;
       max?: string;
       step?: string;
       icon?: string;
+      ```
     ];
       ```
 
