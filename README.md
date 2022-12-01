@@ -69,9 +69,9 @@ export class AppModule { }
     type: string;
     placeholder: string;
     dataList: dataList[
-        id:number,
-        value:string,
-        displayName?:string
+        id: number,
+        value: string,
+        displayName?: string
 
     ];
     validators?: JsonFormValidators[
