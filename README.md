@@ -3,7 +3,7 @@ Angular Version: 11.1.2.
 ---
 [![NPM version](https://img.shields.io/npm/v/sb-filters.svg?flat&logo=npm)](https://img.shields.io/npm/v/sb-filters.svg?style=for-the-badge&logo=npm)
 ---
-## SbSearchfilter angular components for Sunbird !
+## Searchfilter Angular components for Sunbird !
 Contains Search filter components powered by angular. These components are designed to take any type of element rendering based on JSON data. 
 
 ## Getting Started
