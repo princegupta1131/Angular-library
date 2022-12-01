@@ -1,36 +1,53 @@
 # Sb-Search-filter
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.2.
+Angular Version: 11.1.2.
+---
+[![NPM version](https://img.shields.io/npm/v/sb-filters.svg?flat&logo=npm)](https://img.shields.io/npm/v/sb-filters.svg?style=for-the-badge&logo=npm)
+---
 ## SbSearchfilter angular components for Sunbird !
-Contains Search filter components powered by angular. These components are designed to be used in sunbird consumption. Filters library should take any type of element rendering based on JSON data. 
+Contains Search filter components powered by angular. These components are designed to take any type of element rendering based on JSON data. 
 
 ## Getting Started
 For help getting started with a new Angular app, check out the Angular CLI.
 For existing apps, follow these steps to begin using .
 
-## Step 1: Install the package
-
+## Step 1: Install the Required package !
+```
     npm install sb-filters --save
-    npm install @angular/material @angular/cdk @angular/animations --save  
-    ng add @angular/material  
+```
+```
+    npm install @angular/material @angular/cdk @angular/animations --save 
+```
+``` 
+    ng add @angular/material
+```
 
-## Step 2: Import the modules and components
+## Step 2: Import the modules and components !
+
 Import the NgModule for each component you want to use:
-       
+
+```
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 import {SbFiltersModule} from 'sb-filters'
-    
-    @NgModule({
-	    ...
-	    
-	    imports: [SbFiltersModule],
-	    
-	    ...
-    })
+import { AppComponent } from './app.component';
 
-  
-    export class TestAppModule { }
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    SbFiltersModule
+  ],
+  providers: [ ],
+  bootstrap: [ AppComponent ]
+})
+export class AppModule { }
+```
 
-## Step 3: Include the library selector in view( Eg .HTML file)
+## Step 3: Include the library selector in view( Eg .HTML file !
 
+```
  <lib-sb-filters
             [configJsonData] = "formJsonData"
             [searchFilterInfo] = "filterTitleInfo"
@@ -38,23 +55,57 @@ import {SbFiltersModule} from 'sb-filters'
             [languageKey] = "langValue"
             [languageJsonData] = "languageJsonData">
 </lib-sb-filters>
-## Sample Json Data
-### @Input 
-1. formJsonData : {
+
+```
+
+### Options !
+  - `formJsonData`: Array of form objects.
+
+      ```javascript
+    index: number
+    formControlName: string;
+    label: string;
+    preSelectedValue: string;
+    type: string;
+    placeholder: string;
+    dataList: dataList[
+      id:number,
+      value:string,
+      displayName?:string
+    ];
+    validators?: JsonFormValidators[
+      min?: number;
+      max?: number;
+      required?: boolean;
+      requiredTrue?: boolean;
+      email?: boolean;
+      minLength?: boolean;
+      maxLength?: boolean;
+      pattern?: string;
+      nullValidator?: boolean;
+    ];
+    options?: JsonFormControlOptions[
+      min?: string;
+      max?: string;
+      step?: string;
+      icon?: string;
+    ];
+      ```
+
+  - `filterTitleInfo`: Object of title,button/name & CSS configuration.
+  - `langValue`: string of selected language key (en,hi,kn..)
+  - `languageJsonData`: Array of language objects.
+  - `(onChangeFilter)`: component emits values on every input , To get value include event callbacks
+## Sample Json Data !
+``` 
+    formJsonData : {
       "index": 1, // to define the position of html elements
-
       "type": "dropdown", // it will accept these type to create HTML elements -> [Dropdown, Multipledropdown,Checkbox,  Radio, Text, Number, Email, Tel, Textarea, password] 
-
       "label": "Board", 
-
       "placeholder": "Select Board",
-
       "formControlName": "Board",
-
       "preSelectedValue": "CBSE/NCERT", // by default values
-
       "validators": {"required": true}, // if any forms validation
-
       "dataList": [
         { "id": 1, "value": "ICSE" },
         { "id": 2, "value": "CBSE/NCERT" },
@@ -67,19 +118,22 @@ import {SbFiltersModule} from 'sb-filters'
 
     } ....
 
-2. filterTitleInfo : {
+ ``` 
+    filterTitleInfo : {
     title: 'Search Filters', // title
     subTitle: 'Search filters sub-title...', // sub title
     submit: "Submit", // button name
     clear: "Reset" , // button name
-    styling:{
-      orientation:"column", // row || column
-    },
-    isButtonReq: true 
-}
-3. langValue : 'en'...  // selected global language key
+    isButtonReq: true,
+    styling:{ orientation:"column" }, // row || column
+    } ```
 
-4. languageJsonData: [{ // language transalated json data
+```
+ langValue : 'en'...  // selected global language key
+
+```
+```
+languageJsonData: [{ // language transalated json data
     en:
         {
         "Board": "Board",
@@ -103,6 +157,7 @@ import {SbFiltersModule} from 'sb-filters'
             "Subject": "ವಿಷಯ"
         } .....
 }]
+```
 
-### @output 
-5. onFilterChange($event) // search-filter  component emits values on every input , To get value include event callbacks
+### @output !
+ - `onFilterChange($event)` : search-filter  component emits values on every input , To get value include event callbacks
