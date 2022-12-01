@@ -69,33 +69,27 @@ export class AppModule { }
     type: string;
     placeholder: string;
     dataList: dataList[
-      ```
-      id:number,
-      value:string,
-      displayName?:string
+        id:number,
+        value:string,
+        displayName?:string
 
-      ```
     ];
     validators?: JsonFormValidators[
-      ```
-      min?: number;
-      max?: number;
-      required?: boolean;
-      requiredTrue?: boolean;
-      email?: boolean;
-      minLength?: boolean;
-      maxLength?: boolean;
-      pattern?: string;
-      nullValidator?: boolean;
-      ```
+        min?: number;
+        max?: number;
+        required?: boolean;
+        requiredTrue?: boolean;
+        email?: boolean;
+        minLength?: boolean;
+        maxLength?: boolean;
+        pattern?: string;
+        nullValidator?: boolean;
     ];
     options?: JsonFormControlOptions[
-      ```
-      min?: string;
-      max?: string;
-      step?: string;
-      icon?: string;
-      ```
+        min?: string;
+        max?: string;
+        step?: string;
+        icon?: string;
     ];
       ```
 
